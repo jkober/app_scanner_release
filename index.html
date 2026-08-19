@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>App Scanner</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 48px;
+        }
+
+        h1 {
+            margin: 10px 0 5px;
+        }
+
+        .version {
+            color: #666;
+        }
+
+        .card {
+            background: white;
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0,0,0,.08);
+        }
+
+        .button {
+            display: block;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: bold;
+            background: #1976d2;
+            color: white;
+        }
+
+        .button:hover {
+            background: #125ca1;
+        }
+
+        .secondary {
+            background: #555;
+        }
+
+        .info {
+            margin-top: 25px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">📱</div>
+
+    <h1>App Scanner</h1>
+
+    <div class="version">
+        Versión <span id="version">Consultando...</span>
+    </div>
+
+    <div class="card">
+
+        <h2>Descargar aplicación</h2>
+
+        <p>
+            Seleccione la versión correspondiente a su dispositivo Android.
+        </p>
+
+        <a id="arm64"
+           class="button"
+           href="#">
+            Android 64 bits ( Celulares nuevos )
+        </a>
+
+        <a id="armv7"
+           class="button"
+           href="#">
+            Android 32 bits ( Celulares mas viejos )
+        </a>
+
+        <a id="universal"
+           class="button secondary"
+           href="#">
+            Versión Universal (ocupa más espacio)
+        </a>
+
+    </div>
+
+    <div class="info">
+        <strong>¿No sabés cuál descargar?</strong><br>
+        Elegí la versión Universal.
+    </div>
+
+</div>
+
+<script>
+
+const usuario = "jkober";
+const repositorio = "app_scanner_release";
+
+async function cargarVersion() {
+
+    try {
+
+        const respuesta = await fetch(
+            `https://api.github.com/repos/${usuario}/${repositorio}/releases/latest`
+        );
+
+        if (!respuesta.ok) {
+            throw new Error("No se pudo obtener la versión");
+        }
+
+        const release = await respuesta.json();
+
+        const version = release.tag_name;
+
+        document.getElementById("version").textContent = version;
+
+        const urlBase =
+            `https://github.com/${usuario}/${repositorio}/releases/download/${encodeURIComponent(version)}`;
+
+        document.getElementById("arm64").href =
+            `${urlBase}/rcscaner-v8a.apk`;
+
+        document.getElementById("armv7").href =
+            `${urlBase}/rcscaner-v7a.apk`;
+
+        document.getElementById("universal").href =
+            `${urlBase}/rcscaner-universal.apk`;
+
+    } catch (error) {
+
+        document.getElementById("version").textContent =
+            "No disponible";
+
+        console.error(error);
+    }
+}
+
+cargarVersion();
+
+</script>
+
+</body>
+</html>
