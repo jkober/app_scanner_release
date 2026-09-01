@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>App Scanner</title>
+    <title>App Scanner - Descargas</title>
 
     <style>
         * {
@@ -19,7 +18,7 @@
         }
 
         .container {
-            max-width: 500px;
+            max-width: 520px;
             margin: 0 auto;
             padding: 40px 20px;
             text-align: center;
@@ -35,40 +34,78 @@
 
         .version {
             color: #666;
+            font-size: 15px;
         }
 
         .card {
             background: white;
-            margin-top: 30px;
+            margin-top: 25px;
             padding: 25px;
             border-radius: 12px;
             box-shadow: 0 3px 15px rgba(0,0,0,.08);
+            text-align: left;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            font-size: 19px;
+            text-align: center;
+        }
+
+        .section-title {
+            margin: 20px 0 10px;
+            font-size: 15px;
+            font-weight: bold;
+            color: #444;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .button {
             display: block;
-            margin: 15px 0;
-            padding: 15px;
+            margin: 10px 0;
+            padding: 14px;
             border-radius: 8px;
             text-decoration: none;
-            font-size: 17px;
+            font-size: 16px;
             font-weight: bold;
+            text-align: center;
             background: #1976d2;
             color: white;
+            transition: background .2s;
         }
 
         .button:hover {
             background: #125ca1;
         }
 
+        .button-windows {
+            background: #0078d7;
+        }
+        .button-windows:hover {
+            background: #005a9e;
+        }
+
+        .button-linux {
+            background: #e95420;
+        }
+        .button-linux:hover {
+            background: #b83d12;
+        }
+
         .secondary {
             background: #555;
+        }
+        .secondary:hover {
+            background: #333;
         }
 
         .info {
             margin-top: 25px;
             font-size: 14px;
             color: #666;
+            text-align: center;
         }
     </style>
 </head>
@@ -77,58 +114,63 @@
 
 <div class="container">
 
-    <div class="logo">📱</div>
+    <div class="logo">📄📱</div>
 
-    <h1>App Scanner</h1>
+    <h1>App Scanner & Firma</h1>
 
     <div class="version">
-        Versión <span id="version">Consultando...</span>
+        Última Versión: <strong id="version">Consultando...</strong>
     </div>
 
     <div class="card">
 
-        <h2>Descargar aplicación</h2>
+        <h2>Descargar Aplicación</h2>
 
-        <p>
-            Seleccione la versión correspondiente a su dispositivo Android.
-        </p>
+        <!-- Sección PC Windows / Linux -->
+        <div class="section-title">
+            💻 Computadora (PC)
+        </div>
 
-        <a id="arm64"
-           class="button"
-           href="#">
-            Android 64 bits ( Celulares nuevos )
+        <a id="win_exe" class="button button-windows" href="#">
+            🪟 Windows (.EXE)
         </a>
 
-        <a id="armv7"
-           class="button"
-           href="#">
-            Android 32 bits ( Celulares mas viejos )
+        <a id="linux_jar" class="button button-linux" href="#">
+            🐧 Linux / Multiplataforma (.JAR)
         </a>
 
-        <a id="universal"
-           class="button secondary"
-           href="#">
-            Versión Universal (ocupa más espacio)
+        <!-- Sección Celulares Android -->
+        <div class="section-title" style="margin-top: 25px;">
+            📱 Celulares (Android)
+        </div>
+
+        <a id="arm64" class="button" href="#">
+            Android 64 bits (Celulares nuevos)
+        </a>
+
+        <a id="armv7" class="button" href="#">
+            Android 32 bits (Celulares más viejos)
+        </a>
+
+        <a id="universal" class="button secondary" href="#">
+            Android Universal (Compatible con todos)
         </a>
 
     </div>
 
     <div class="info">
-        <strong>¿No sabés cuál descargar?</strong><br>
-        Elegí la versión Universal.
+        <strong>¿Tenés dudas?</strong><br>
+        En Windows descargá el <strong>.EXE</strong>. En Android elegí la versión <strong>Universal</strong> si no sabés cuál corresponde a tu equipo.
     </div>
 
 </div>
 
 <script>
-
 const usuario = "jkober";
 const repositorio = "app_scanner_release";
 
 async function cargarVersion() {
-
     try {
-
         const respuesta = await fetch(
             `https://api.github.com/repos/${usuario}/${repositorio}/releases/latest`
         );
@@ -138,34 +180,37 @@ async function cargarVersion() {
         }
 
         const release = await respuesta.json();
-
         const version = release.tag_name;
 
         document.getElementById("version").textContent = version;
 
-        const urlBase =
-            `https://github.com/${usuario}/${repositorio}/releases/download/${encodeURIComponent(version)}`;
+        const urlBase = `https://github.com/${usuario}/${repositorio}/releases/download/${encodeURIComponent(version)}`;
 
-        document.getElementById("arm64").href =
-            `${urlBase}/rcscaner-v8a.apk`;
+        // Enlaces de PC
+        document.getElementById("win_exe").href = `${urlBase}/appScanner.exe`;
+        document.getElementById("linux_jar").href = `${urlBase}/AppScanners.jar`;
 
-        document.getElementById("armv7").href =
-            `${urlBase}/rcscaner-v7a.apk`;
-
-        document.getElementById("universal").href =
-            `${urlBase}/rcscaner-universal.apk`;
+        // Enlaces de Android
+        document.getElementById("arm64").href = `${urlBase}/rcscaner-v8a.apk`;
+        document.getElementById("armv7").href = `${urlBase}/rcscaner-v7a.apk`;
+        document.getElementById("universal").href = `${urlBase}/rcscaner-universal.apk`;
 
     } catch (error) {
-
-        document.getElementById("version").textContent =
-            "No disponible";
-
+        document.getElementById("version").textContent = "Disponible en Releases";
+        
+        // Fallback enlaces directos a latest
+        const fallbackBase = `https://github.com/${usuario}/${repositorio}/releases/latest/download`;
+        document.getElementById("win_exe").href = `${fallbackBase}/appScanner.exe`;
+        document.getElementById("linux_jar").href = `${fallbackBase}/AppScanners.jar`;
+        document.getElementById("arm64").href = `${fallbackBase}/rcscaner-v8a.apk`;
+        document.getElementById("armv7").href = `${fallbackBase}/rcscaner-v7a.apk`;
+        document.getElementById("universal").href = `${fallbackBase}/rcscaner-universal.apk`;
+        
         console.error(error);
     }
 }
 
 cargarVersion();
-
 </script>
 
 </body>
