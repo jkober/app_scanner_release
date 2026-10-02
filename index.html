@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App Scanner - Descargas</title>
+    <title>App Scanner &amp; Firma - Descargas</title>
 
     <style>
         * {
@@ -12,95 +12,233 @@
 
         body {
             margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-            background: #f4f6f8;
-            color: #222;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
             line-height: 1.5;
         }
 
         .container {
-            max-width: 520px;
+            max-width: 980px;
             margin: 0 auto;
-            padding: 35px 20px 50px;
+            padding: 40px 20px 60px;
+        }
+
+        /* HEADER */
+        .header {
             text-align: center;
+            margin-bottom: 30px;
         }
 
-        .logo {
-            font-size: 42px;
-            margin-bottom: 5px;
+        .header-logo {
+            font-size: 46px;
+            margin-bottom: 8px;
+            display: inline-block;
         }
 
-        h1 {
-            margin: 5px 0;
-            font-size: 25px;
-            color: #1a1a1a;
+        .header h1 {
+            margin: 0 0 6px;
+            font-size: 30px;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: -0.5px;
         }
 
-        .version {
-            color: #666;
-            font-size: 14px;
+        .header-desc {
+            font-size: 15px;
+            color: #64748b;
+            margin: 0 0 12px;
+        }
+
+        .version-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            font-size: 13px;
+            color: #475569;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+
+        .version-badge strong {
+            color: #1e293b;
+        }
+
+        /* SECCIONES Y TITULOS */
+        .section-header {
+            margin: 32px 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 19px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .section-header span.icon {
+            font-size: 22px;
+        }
+
+        /* GRIDS */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 22px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        @media (max-width: 480px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 24px 14px 40px;
+            }
+            .header h1 {
+                font-size: 24px;
+            }
+        }
+
+        /* CARDS */
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+        .card-title-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title-group h2,
+        .card-title-group h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .card-desc {
+            font-size: 13.5px;
+            color: #475569;
+            margin: 0 0 16px;
+            line-height: 1.45;
+        }
+
+        /* BADGES */
+        .badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .badge-gray {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .badge-green {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-orange {
+            background: #ffedd5;
+            color: #9a3412;
+        }
+
+        .badge-blue {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+
+        /* CAJAS DE PASOS INTERIORES */
+        .step-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 12px 14px;
             margin-bottom: 12px;
         }
 
-        .card {
-            background: white;
-            margin-top: 20px;
-            padding: 22px;
-            border-radius: 12px;
-            box-shadow: 0 4px 18px rgba(0,0,0,0.06);
-            text-align: left;
-            border: 1px solid #eef0f3;
+        .step-desc {
+            font-size: 12.5px;
+            color: #475569;
+            margin: 0 0 8px;
         }
 
-        .card h2 {
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 19px;
-            text-align: center;
-            color: #222;
-        }
-
-        .section-title {
-            margin: 18px 0 10px;
-            font-size: 15px;
-            font-weight: 700;
-            color: #374151;
+        /* BOTONES */
+        .button {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
-        }
-
-        .button {
-            display: block;
-            margin: 10px 0;
-            padding: 13px;
-            border-radius: 8px;
+            width: 100%;
+            padding: 13px 18px;
+            border-radius: 10px;
             text-decoration: none;
-            font-size: 15px;
-            font-weight: bold;
+            font-size: 14.5px;
+            font-weight: 700;
             text-align: center;
-            background: #1976d2;
-            color: white;
+            color: #ffffff;
             transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+            border: none;
+            cursor: pointer;
         }
 
         .button:hover {
-            background: #125ca1;
-            transform: translateY(-1px);
+            transform: translateY(-1.5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
         }
 
-        .button-extension {
+        .button-crx {
             background: #107c41;
-            font-size: 16px;
+            font-size: 15px;
             padding: 14px;
         }
-        .button-extension:hover {
+        .button-crx:hover {
             background: #0b5a2f;
         }
 
         .button-firefox {
             background: linear-gradient(135deg, #ea580c, #db2777);
-            font-size: 16px;
+            font-size: 15px;
             padding: 14px;
         }
         .button-firefox:hover {
@@ -109,8 +247,8 @@
 
         .button-policy {
             background: #475569;
-            font-size: 14px;
-            padding: 10px;
+            font-size: 13px;
+            padding: 9px 12px;
         }
         .button-policy:hover {
             background: #334155;
@@ -118,57 +256,98 @@
 
         .button-windows {
             background: #0078d7;
+            font-size: 15px;
+            padding: 14px;
         }
         .button-windows:hover {
             background: #005a9e;
         }
 
         .button-linux {
-            background: #e95420;
+            background: #ea580c;
+            font-size: 15px;
+            padding: 14px;
         }
         .button-linux:hover {
-            background: #b83d12;
+            background: #c2410c;
         }
 
-        .secondary {
-            background: #64748b;
-        }
-        .secondary:hover {
-            background: #475569;
-        }
-
-        .step-badge {
-            display: inline-block;
-            background: #e0e7ff;
-            color: #3730a3;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 2px 7px;
-            border-radius: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 4px;
-        }
-
-        .step-box {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 12px 14px;
-            margin: 10px 0 12px;
-        }
-
-        .step-desc {
-            font-size: 13px;
-            color: #475569;
-            margin: 0 0 8px;
-        }
-
-        .info {
-            margin-top: 25px;
+        .button-android {
+            background: #0d9488;
             font-size: 14px;
+            padding: 12px;
+        }
+        .button-android:hover {
+            background: #0f766e;
+        }
+
+        .button-universal {
+            background: #4f46e5;
+            font-size: 14px;
+            padding: 12px;
+        }
+        .button-universal:hover {
+            background: #4338ca;
+        }
+
+        /* DESINSTALADOR EN RECUADRO */
+        .uninstall-box {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #e2e8f0;
+            font-size: 11.5px;
             color: #64748b;
             text-align: center;
+            line-height: 1.4;
+        }
+
+        .uninstall-link {
+            color: #dc2626;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+        .uninstall-link:hover {
+            color: #b91c1c;
+        }
+
+        /* CARD CUADRADA / APP */
+        .app-card {
+            text-align: center;
+            padding: 26px 20px;
+        }
+
+        .app-icon {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .app-card h3 {
+            margin: 0 0 6px;
+            font-size: 17px;
+            color: #0f172a;
+        }
+
+        .app-card p {
+            font-size: 12.5px;
+            color: #64748b;
+            margin: 0 0 16px;
+            min-height: 36px;
+        }
+
+        /* INFO FOOTER */
+        .info-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-top: 36px;
+            text-align: center;
+            font-size: 13.5px;
+            color: #475569;
+        }
+
+        .info-card strong {
+            color: #0f172a;
         }
     </style>
 </head>
@@ -177,135 +356,200 @@
 
 <div class="container">
 
-    <div class="logo">&#128241; &#128187;</div>
-
-    <h1>App Scanner &amp; Firma</h1>
-
-    <div class="version">
-        &Uacute;ltima Versi&oacute;n: <strong id="version">Consultando...</strong>
-    </div>
-
-    <!-- TARJETA: EXTENSION MULTI-NAVEGADOR -->
-    <div class="card">
-        <h2>&#129513; Extensi&oacute;n para Navegadores Web</h2>
-        <p style="font-size: 14px; color: #4b5563; margin-top: 0; margin-bottom: 14px; text-align: center;">
-            Puente de conexi&oacute;n entre el sistema web y el servicio de escaneo local.
+    <!-- ENCABEZADO -->
+    <header class="header">
+        <div class="header-logo">&#128224; &#128241; &#128187;</div>
+        <h1>App Scanner &amp; Firma Digital</h1>
+        <p class="header-desc">
+            Centro de descarga e instalaci&oacute;n de extensiones web y aplicaciones locales de escaneo
         </p>
+        <div class="version-badge">
+            <span>&Uacute;ltima Versi&oacute;n:</span>
+            <strong id="version">Consultando...</strong>
+        </div>
+    </header>
 
-        <!-- SECCION CHROMIUM -->
-        <div style="margin-top: 8px; margin-bottom: 8px;">
-            <div style="display: flex; align-items: center; justify-content: space-between;">
-                <strong style="font-size: 14px; color: #1e293b;">&#127760; Google Chrome, Edge, Opera y Brave</strong>
-                <span class="step-badge" style="background: #e2e8f0; color: #334155;">Chromium</span>
+    <!-- ========================================== -->
+    <!-- FILA 1: 2 ARRIBA - EXTENSIONES NAVEGADORES -->
+    <!-- ========================================== -->
+    <div class="section-header">
+        <span class="icon">&#129513;</span>
+        <span>Extensiones para Navegadores Web</span>
+    </div>
+
+    <div class="grid-2">
+        <!-- RECUADRO 1: CHROMIUM (Chrome, Edge, Opera, Brave) -->
+        <div class="card">
+            <div>
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <span style="font-size: 24px;">&#127760;</span>
+                        <h2>Chrome, Edge y Opera</h2>
+                    </div>
+                    <span class="badge badge-gray">Chromium</span>
+                </div>
+                <p class="card-desc">
+                    Puente de conexi&oacute;n para Google Chrome, Microsoft Edge, Opera y Brave. Requiere habilitar pol&iacute;ticas una sola vez en la computadora.
+                </p>
+
+                <!-- Paso 1: Habilitar en la PC -->
+                <div class="step-box">
+                    <span class="badge badge-blue" style="margin-bottom: 4px;">Paso 1 &bull; Solo 1&ordf; vez en la PC</span>
+                    <p class="step-desc">
+                        Descarga y ejecuta el activador de pol&iacute;ticas para autorizar la instalaci&oacute;n directa:
+                    </p>
+                    <a href="extension_installers/windows/install_rc_extension.reg" download class="button button-policy">
+                        &#128190; Descargar Activador Windows (.reg)
+                    </a>
+                    <div style="font-size: 11.5px; color: #64748b; text-align: center; margin-top: 5px;">
+                        &iquest;Usas Linux? <a href="extension_installers/linux/install_rc_extension.sh" download style="color: #1976d2; font-weight: bold;">Descargar instalador (.sh)</a>
+                    </div>
+                </div>
+
+                <!-- Paso 2: Instalar la extension -->
+                <div class="step-box" style="background: #f0fdf4; border-color: #bbf7d0;">
+                    <span class="badge badge-green" style="margin-bottom: 4px;">Paso 2 &bull; Instalaci&oacute;n</span>
+                    <p class="step-desc" style="color: #166534;">
+                        Haz clic desde Chrome, Edge u Opera y confirma <strong>&laquo;Agregar extensi&oacute;n&raquo;</strong>:
+                    </p>
+                    <a href="chrome.crx" class="button button-crx">
+                        &#10010; Instalar Extensi&oacute;n (.CRX)
+                    </a>
+                    <div style="font-size: 11.5px; color: #15803d; text-align: center; margin-top: 6px;">
+                        &#10003; Se actualizar&aacute; autom&aacute;ticamente en segundo plano.
+                    </div>
+                    <div style="font-size: 11px; color: #166534; margin-top: 8px; line-height: 1.35; background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #bbf7d0;">
+                        <strong>Nota Edge/Opera:</strong> Si se descarga el archivo en vez de abrir el di&aacute;logo, haz clic en &eacute;l para confirmar o arr&aacute;stralo a <code>edge://extensions</code>.
+                    </div>
+                </div>
+
+                <!-- Desinstalador dentro del recuadro Chromium (inmediatamente abajo del boton) -->
+                <div class="uninstall-box">
+                    &iquest;Deseas remover la extensi&oacute;n o sus pol&iacute;ticas de Chromium?
+                    <br>
+                    <a href="extension_installers/windows/uninstall_rc_extension.reg" download class="uninstall-link">
+                        Desinstalador Windows (.reg)
+                    </a>
+                    &bull;
+                    <a href="extension_installers/linux/uninstall_rc_extension.sh" download class="uninstall-link">
+                        Desinstalador Linux (.sh)
+                    </a>
+                </div>
             </div>
         </div>
 
-        <!-- Paso 1: Habilitar en la PC -->
-        <div class="step-box">
-            <span class="step-badge">Paso 1 &bull; Solo la 1&ordf; vez en la PC</span>
-            <p class="step-desc">
-                Descarga y ejecuta el activador de pol&iacute;ticas (habilita la instalaci&oacute;n directa en este equipo para Chrome, Edge y Opera):
-            </p>
-            <a href="extension_installers/windows/install_rc_extension.reg" download class="button button-policy">
-                Descargar Activador de Pol&iacute;ticas (.reg)
+        <!-- RECUADRO 2: MOZILLA FIREFOX -->
+        <div class="card" style="border-color: #fed7aa; background: #fffdfb;">
+            <div>
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <span style="font-size: 24px;">&#129418;</span>
+                        <h2 style="color: #9a3412;">Mozilla Firefox</h2>
+                    </div>
+                    <span class="badge badge-orange">1 Clic &bull; Sin Registro</span>
+                </div>
+                <p class="card-desc">
+                    Instalaci&oacute;n oficial directa sin tocar el Registro de Windows ni necesitar permisos de Administrador.
+                </p>
+
+                <div class="step-box" style="background: #fff7ed; border-color: #ffedd5; padding: 16px;">
+                    <p class="step-desc" style="color: #9a3412; font-size: 13.5px; margin-bottom: 12px;">
+                        Pulsa el bot&oacute;n desde Firefox para abrir el di&aacute;logo oficial del navegador:
+                    </p>
+                    <a href="firefox.xpi" class="button button-firefox">
+                        &#129418; + Instalar Extensi&oacute;n en Firefox (.XPI)
+                    </a>
+                    <div style="font-size: 12px; color: #9a3412; text-align: center; margin-top: 10px; line-height: 1.4;">
+                        &#10003; Firefox abrir&aacute; la ventana: <em>&laquo;&iquest;A&ntilde;adir "RCivil Scanner Bridge" a Firefox?&raquo;</em> &rarr; Pulsa <strong>A&ntilde;adir</strong>.
+                    </div>
+                    <div style="font-size: 12px; color: #15803d; text-align: center; margin-top: 6px;">
+                        &#10003; Autoactualizable silenciosamente v&iacute;a <code>firefox_updates.json</code>.
+                    </div>
+                </div>
+
+                <div style="font-size: 12px; color: #64748b; background: #ffffff; border: 1px solid #fed7aa; border-radius: 8px; padding: 10px 12px; margin-top: 12px;">
+                    &#128161; <strong>Ventaja Firefox:</strong> No requiere descargar ni ejecutar ning&uacute;n archivo <code>.reg</code> previo.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- FILA 2: 2 AL MEDIO - APPS PARA COMPUTADORA -->
+    <!-- ========================================== -->
+    <div class="section-header">
+        <span class="icon">&#128187;</span>
+        <span>App Scanner para Computadora (PC)</span>
+    </div>
+
+    <div class="grid-2">
+        <!-- APP WINDOWS -->
+        <div class="card app-card">
+            <div class="app-icon">&#129695;</div>
+            <h3>Windows (.EXE)</h3>
+            <p>Aplicaci&oacute;n de escritorio para Windows 10, Windows 11 y Windows Server.</p>
+            <a id="win_exe" class="button button-windows" href="#">
+                &#128190; Descargar App Windows (.EXE)
             </a>
-            <div style="font-size: 12px; color: #64748b; text-align: center; margin-top: 4px;">
-                &iquest;Usas Linux? <a href="extension_installers/linux/install_rc_extension.sh" download style="color: #1976d2; font-weight: bold;">Descargar instalador (.sh)</a>
-            </div>
         </div>
 
-        <!-- Paso 2: Instalar la extension -->
-        <div class="step-box" style="background: #f0fdf4; border-color: #bbf7d0;">
-            <span class="step-badge" style="background: #dcfce7; color: #15803d;">Paso 2 &bull; Instalaci&oacute;n</span>
-            <p class="step-desc" style="color: #166534;">
-                Haz clic en el bot&oacute;n desde Chrome, Edge u Opera y pulsa <strong>&laquo;Agregar extensi&oacute;n&raquo;</strong>:
-            </p>
-            <a href="chrome.crx" class="button button-extension">
-                + Instalar Extensi&oacute;n (Chrome / Edge / Opera)
-            </a>
-            <div style="font-size: 12px; color: #15803d; text-align: center; margin-top: 4px;">
-                &#10003; Se actualizar&aacute; autom&aacute;ticamente en segundo plano cuando haya nuevas versiones.
-            </div>
-            <div style="font-size: 11px; color: #166534; margin-top: 8px; line-height: 1.4; background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #bbf7d0; text-align: left;">
-                <strong>Nota para Edge y Opera:</strong> Si al pulsar el bot&oacute;n se descarga <code>chrome.crx</code> en lugar de abrirse la ventana emergente, haz clic en el archivo descargado para confirmar o arr&aacute;stralo directamente a <code>edge://extensions</code> (o <code>opera://extensions</code>).
-            </div>
-        </div>
-
-        <!-- SECCION FIREFOX -->
-        <div style="margin-top: 20px; margin-bottom: 8px; padding-top: 14px; border-top: 1px solid #e2e8f0;">
-            <div style="display: flex; align-items: center; justify-content: space-between;">
-                <strong style="font-size: 14px; color: #9a3412;">&#129418; Mozilla Firefox</strong>
-                <span class="step-badge" style="background: #ffedd5; color: #c2410c;">1 Clic &bull; Sin Registro</span>
-            </div>
-        </div>
-
-        <div class="step-box" style="background: #fffaf5; border-color: #fed7aa;">
-            <p class="step-desc" style="color: #9a3412;">
-                Instalaci&oacute;n directa oficial. No requiere ejecutar ning&uacute;n archivo de directivas ni permisos de Administrador:
-            </p>
-            <a href="firefox.xpi" class="button button-firefox">
-                + Instalar Extensi&oacute;n en Firefox (.XPI)
-            </a>
-            <div style="font-size: 12px; color: #9a3412; text-align: center; margin-top: 6px;">
-                &#10003; Firefox abrir&aacute; la ventana: <em>&laquo;&iquest;A&ntilde;adir "RCivil Scanner Bridge" a Firefox?&raquo;</em> &rarr; Pulsa <strong>A&ntilde;adir</strong>.
-            </div>
-            <div style="font-size: 12px; color: #15803d; text-align: center; margin-top: 4px;">
-                &#10003; Se actualizar&aacute; autom&aacute;ticamente en segundo plano.
-            </div>
-        </div>
-
-        <!-- Seccion: Desinstalador opcional -->
-        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px dashed #e2e8f0; font-size: 12px; color: #64748b; text-align: center;">
-            &iquest;Deseas remover la extensi&oacute;n o sus pol&iacute;ticas de Chromium?
-            <br>
-            <a href="extension_installers/windows/uninstall_rc_extension.reg" download style="color: #dc2626; font-weight: bold; text-decoration: underline; margin-right: 6px;">
-                Descargar Desinstalador Windows (.reg)
-            </a>
-            |
-            <a href="extension_installers/linux/uninstall_rc_extension.sh" download style="color: #dc2626; font-weight: bold; text-decoration: underline; margin-left: 6px;">
-                Desinstalador Linux (.sh)
+        <!-- APP LINUX / MULTIPLATAFORMA -->
+        <div class="card app-card">
+            <div class="app-icon">&#128039;</div>
+            <h3>Linux / Multiplataforma (.JAR)</h3>
+            <p>Paquete ejecutable Java compatible con Linux (Ubuntu, Debian) y otras plataformas.</p>
+            <a id="linux_jar" class="button button-linux" href="#">
+                &#128190; Descargar App Linux (.JAR)
             </a>
         </div>
     </div>
 
-    <!-- TARJETA: APLICACION DE ESCRITORIO Y CELULAR -->
-    <div class="card">
-        <h2>Descargar Aplicaci&oacute;n</h2>
-
-        <!-- Seccion PC Windows / Linux -->
-        <div class="section-title">
-            &#128187; Computadora (PC)
-        </div>
-
-        <a id="win_exe" class="button button-windows" href="#">
-            Windows (.EXE)
-        </a>
-
-        <a id="linux_jar" class="button button-linux" href="#">
-            Linux / Multiplataforma (.JAR)
-        </a>
-
-        <!-- Seccion Celulares Android -->
-        <div class="section-title" style="margin-top: 25px;">
-            &#128241; Celulares (Android)
-        </div>
-
-        <a id="arm64" class="button" href="#">
-            Android 64 bits (Celulares nuevos)
-        </a>
-
-        <a id="armv7" class="button" href="#">
-            Android 32 bits (Celulares m&aacute;s antiguos)
-        </a>
-
-        <a id="universal" class="button secondary" href="#">
-            Android Universal (Compatible con todos)
-        </a>
+    <!-- ========================================== -->
+    <!-- FILA 3: 3 ABAJO - APPS PARA CELULAR ANDROID -->
+    <!-- ========================================== -->
+    <div class="section-header">
+        <span class="icon">&#128241;</span>
+        <span>App Scanner para Celulares (Android)</span>
     </div>
 
-    <div class="info">
-        <strong>&iquest;Ten&eacute;s dudas?</strong><br>
-        En Windows descarg&aacute; el <strong>.EXE</strong>. En Android eleg&iacute; la versi&oacute;n <strong>Universal</strong> si no sab&eacute;s cu&aacute;l corresponde a tu equipo.
+    <div class="grid-3">
+        <!-- ANDROID 64 BITS -->
+        <div class="card app-card">
+            <div class="app-icon">&#128241;</div>
+            <h3>Android 64 bits</h3>
+            <p>Para la mayor&iacute;a de tel&eacute;fonos modernos (arquitectura ARM64 / v8a).</p>
+            <a id="arm64" class="button button-android" href="#">
+                &#128229; Descargar APK (v8a)
+            </a>
+        </div>
+
+        <!-- ANDROID 32 BITS -->
+        <div class="card app-card">
+            <div class="app-icon">&#128241;</div>
+            <h3>Android 32 bits</h3>
+            <p>Para tel&eacute;fonos o tablets m&aacute;s antiguos (arquitectura ARMv7 / v7a).</p>
+            <a id="armv7" class="button button-android" href="#">
+                &#128229; Descargar APK (v7a)
+            </a>
+        </div>
+
+        <!-- ANDROID UNIVERSAL -->
+        <div class="card app-card" style="border-color: #c7d2fe; background: #fafbff;">
+            <div class="app-icon">&#11088;</div>
+            <div>
+                <span class="badge badge-blue" style="margin-bottom: 6px;">Recomendado</span>
+                <h3>Android Universal</h3>
+            </div>
+            <p>Paquete integral compatible con cualquier celular o dispositivo Android.</p>
+            <a id="universal" class="button button-universal" href="#">
+                &#128229; Descargar Universal (APK)
+            </a>
+        </div>
+    </div>
+
+    <!-- FOOTER DE AYUDA -->
+    <div class="info-card">
+        <strong>&iquest;Ten&eacute;s dudas?</strong> En Windows descarg&aacute; el archivo <strong>.EXE</strong>. En Android eleg&iacute; la versi&oacute;n <strong>Universal</strong> si no sab&eacute;s cu&aacute;l corresponde a tu tel&eacute;fono.
     </div>
 
 </div>
