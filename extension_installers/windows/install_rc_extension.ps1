@@ -1,9 +1,14 @@
-﻿# ==============================================================================
+# ==============================================================================
 # install_rc_extension.ps1
 # Habilita la instalacion en 1 clic de la extension RCivil Scanner desde GitHub Pages
 # Compatible con cualquier PC (en Dominio o en Grupo de Trabajo / WORKGROUP)
 # Sin restricciones ni necesidad de registrarse en Google
 # ==============================================================================
+
+try {
+    [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+    $OutputEncoding = [System.Text.Encoding]::UTF8
+} catch {}
 
 # 1. Asegurar privilegios de Administrador
 $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
@@ -78,7 +83,7 @@ Write-Host " 2. Ingrese a su pagina de descargas:"
 Write-Host "    https://jkober.github.io/app_scanner_release/" -ForegroundColor White
 Write-Host " 3. Haga clic en el enlace para descargar 'chrome.crx'."
 Write-Host "    Chrome abrira directamente la ventana de instalacion:"
-Write-Host "    '¿Quieres agregar RCivil Scanner Bridge?'" -ForegroundColor White
+Write-Host "    'Quieres agregar RCivil Scanner Bridge?'" -ForegroundColor White
 Write-Host " 4. Pulse 'Agregar extension' y quedara instalada."
 Write-Host "    Las actualizaciones futuras se descargaran solas desde updates.xml."
 Write-Host "------------------------------------------------------------`n" -ForegroundColor Cyan

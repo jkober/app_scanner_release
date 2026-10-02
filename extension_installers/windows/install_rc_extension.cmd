@@ -1,4 +1,5 @@
 @echo off
+@chcp 65001 >nul
 setlocal EnableDelayedExpansion
 
 :: 1. Comprobar si ya se ejecuta como Administrador
