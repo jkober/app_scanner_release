@@ -1,9 +1,39 @@
 Windows Registry Editor Version 5.00
 
+; ==============================================================================
+; Google Chrome
+; ==============================================================================
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome]
 "ExtensionSettings"=-
 "CloudManagementEnrollmentToken"=-
 
 [-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome\ExtensionInstallSources]
-
 [-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome\ExtensionInstallAllowlist]
+
+; ==============================================================================
+; Microsoft Edge
+; ==============================================================================
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge]
+"ExtensionSettings"=-
+"CloudManagementEnrollmentToken"=-
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallSources]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallAllowlist]
+
+; ==============================================================================
+; Chromium
+; ==============================================================================
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Chromium]
+"ExtensionSettings"=-
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Chromium\ExtensionInstallSources]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Chromium\ExtensionInstallAllowlist]
+
+; ==============================================================================
+; Brave Browser
+; ==============================================================================
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\BraveSoftware\Brave]
+"ExtensionSettings"=-
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\BraveSoftware\Brave\ExtensionInstallSources]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\BraveSoftware\Brave\ExtensionInstallAllowlist]

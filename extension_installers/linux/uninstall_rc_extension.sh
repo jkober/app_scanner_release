@@ -1,7 +1,7 @@
 #!/bin/bash
 # ==============================================================================
 # uninstall_rc_extension.sh
-# Desinstala la política de la extensión RC en Ubuntu/Debian Linux
+# Desinstala la politica de la extension RC en Chrome, Edge, Chromium y Brave en Linux
 # ==============================================================================
 
 set -e
@@ -12,17 +12,18 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
-CHROME_POLICY="/etc/opt/chrome/policies/managed/rc_extension.json"
-CHROMIUM_POLICY="/etc/chromium/policies/managed/rc_extension.json"
+FILES=(
+  "/etc/opt/chrome/policies/managed/rc_extension.json"
+  "/etc/opt/edge/policies/managed/rc_extension.json"
+  "/etc/chromium/policies/managed/rc_extension.json"
+  "/etc/brave/policies/managed/rc_extension.json"
+)
 
-if [ -f "$CHROME_POLICY" ]; then
-  rm -f "$CHROME_POLICY"
-  echo "[+] Removida política de Google Chrome: $CHROME_POLICY"
-fi
+for FILE in "${FILES[@]}"; do
+  if [ -f "$FILE" ]; then
+    rm -f "$FILE"
+    echo "[+] Removida politica: $FILE"
+  fi
+done
 
-if [ -f "$CHROMIUM_POLICY" ]; then
-  rm -f "$CHROMIUM_POLICY"
-  echo "[+] Removida política de Chromium: $CHROMIUM_POLICY"
-fi
-
-echo "[OK] Desinstalación completada. Reinicie Chrome para aplicar los cambios."
+echo "[OK] Desinstalacion completada. Reinicie sus navegadores."

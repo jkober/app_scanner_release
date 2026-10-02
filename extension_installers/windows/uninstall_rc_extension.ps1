@@ -1,6 +1,6 @@
 ﻿# ==============================================================================
 # uninstall_rc_extension.ps1
-# Remueve las politicas de la extension RC en Google Chrome
+# Remueve las politicas de la extension RC en Chrome, Edge y Chromium
 # ==============================================================================
 
 try {
@@ -21,52 +21,57 @@ if (-not $isAdmin) {
 }
 
 $EXT_ID = "mndncghnabjmepgdapcijjohdjonkkle"
-$REG_PATH = "HKLM:\SOFTWARE\Policies\Google\Chrome"
+
+$browsers = @(
+    @{ Name = "Google Chrome";  Path = "HKLM:\SOFTWARE\Policies\Google\Chrome" },
+    @{ Name = "Microsoft Edge"; Path = "HKLM:\SOFTWARE\Policies\Microsoft\Edge" },
+    @{ Name = "Chromium";       Path = "HKLM:\SOFTWARE\Policies\Chromium" },
+    @{ Name = "Brave Browser";  Path = "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" }
+)
 
 Write-Host "============================================================" -ForegroundColor Cyan
-Write-Host " Desinstalador de Politicas de Chrome - Extension RC        " -ForegroundColor Cyan
+Write-Host " Desinstalador de Politicas Multi-Navegador                  " -ForegroundColor Cyan
 Write-Host "============================================================" -ForegroundColor Cyan
 
-# 1. Remover de ExtensionSettings
-if (Test-Path $REG_PATH) {
-    $currentJsonRaw = (Get-ItemProperty -Path $REG_PATH -Name "ExtensionSettings" -ErrorAction SilentlyContinue).ExtensionSettings
-    if ($currentJsonRaw) {
-        try {
-            $settingsObj = $currentJsonRaw | ConvertFrom-Json -AsHashtable
-            if ($settingsObj.ContainsKey($EXT_ID)) {
-                $settingsObj.Remove($EXT_ID)
-                if ($settingsObj.Count -gt 0) {
-                    $finalJson = ($settingsObj | ConvertTo-Json -Compress -Depth 10)
-                    Set-ItemProperty -Path $REG_PATH -Name "ExtensionSettings" -Value $finalJson -Type String
-                    Write-Host "[+] Extension $EXT_ID removida de ExtensionSettings." -ForegroundColor Green
-                } else {
-                    Remove-ItemProperty -Path $REG_PATH -Name "ExtensionSettings" -ErrorAction SilentlyContinue
-                    Write-Host "[+] ExtensionSettings eliminada del Registro." -ForegroundColor Green
+foreach ($b in $browsers) {
+    $regBase = $b.Path
+    $bName   = $b.Name
+
+    if (Test-Path $regBase) {
+        # 1. Remover de ExtensionSettings
+        $currentJsonRaw = (Get-ItemProperty -Path $regBase -Name "ExtensionSettings" -ErrorAction SilentlyContinue).ExtensionSettings
+        if ($currentJsonRaw) {
+            try {
+                $settingsObj = $currentJsonRaw | ConvertFrom-Json -AsHashtable
+                if ($settingsObj.ContainsKey($EXT_ID)) {
+                    $settingsObj.Remove($EXT_ID)
+                    if ($settingsObj.Count -gt 0) {
+                        $finalJson = ($settingsObj | ConvertTo-Json -Compress -Depth 10)
+                        Set-ItemProperty -Path $regBase -Name "ExtensionSettings" -Value $finalJson -Type String
+                    } else {
+                        Remove-ItemProperty -Path $regBase -Name "ExtensionSettings" -ErrorAction SilentlyContinue
+                    }
                 }
+            } catch {
+                Remove-ItemProperty -Path $regBase -Name "ExtensionSettings" -ErrorAction SilentlyContinue
             }
-        } catch {
-            Remove-ItemProperty -Path $REG_PATH -Name "ExtensionSettings" -ErrorAction SilentlyContinue
         }
+
+        # 2. Remover ExtensionInstallSources y ExtensionInstallAllowlist
+        $sourcesPath = Join-Path $regBase "ExtensionInstallSources"
+        if (Test-Path $sourcesPath) { Remove-Item $sourcesPath -Recurse -Force -ErrorAction SilentlyContinue }
+
+        $allowPath = Join-Path $regBase "ExtensionInstallAllowlist"
+        if (Test-Path $allowPath) { Remove-Item $allowPath -Recurse -Force -ErrorAction SilentlyContinue }
+
+        # 3. Remover token si existiera
+        Remove-ItemProperty -Path $regBase -Name "CloudManagementEnrollmentToken" -ErrorAction SilentlyContinue
+
+        Write-Host "[+] Politicas removidas para: $bName" -ForegroundColor Green
     }
 }
 
-# 2. Remover ExtensionInstallSources y ExtensionInstallAllowlist
-$sourcesPath = Join-Path $REG_PATH "ExtensionInstallSources"
-if (Test-Path $sourcesPath) {
-    Remove-Item $sourcesPath -Recurse -Force -ErrorAction SilentlyContinue
-    Write-Host "[+] Clave ExtensionInstallSources eliminada." -ForegroundColor Green
-}
-
-$allowPath = Join-Path $REG_PATH "ExtensionInstallAllowlist"
-if (Test-Path $allowPath) {
-    Remove-Item $allowPath -Recurse -Force -ErrorAction SilentlyContinue
-    Write-Host "[+] Clave ExtensionInstallAllowlist eliminada." -ForegroundColor Green
-}
-
-# 3. Remover token de prueba si existiera
-Remove-ItemProperty -Path $REG_PATH -Name "CloudManagementEnrollmentToken" -ErrorAction SilentlyContinue
-
 Write-Host "`n[OK] Politicas de la extension desinstaladas exitosamente." -ForegroundColor Green
-Write-Host "Para completar: Cierre y vuelva a abrir Google Chrome." -ForegroundColor Yellow
+Write-Host "Para completar: Cierre y vuelva a abrir sus navegadores." -ForegroundColor Yellow
 Write-Host "Presione Enter para salir..." -ForegroundColor Gray
 try { Read-Host } catch {}

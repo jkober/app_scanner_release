@@ -1,8 +1,7 @@
-# ==============================================================================
+﻿# ==============================================================================
 # install_rc_extension.ps1
 # Habilita la instalacion en 1 clic de la extension RCivil Scanner desde GitHub Pages
-# Compatible con cualquier PC (en Dominio o en Grupo de Trabajo / WORKGROUP)
-# Sin restricciones ni necesidad de registrarse en Google
+# Compatible con Google Chrome, Microsoft Edge, Opera y Chromium
 # ==============================================================================
 
 try {
@@ -25,67 +24,72 @@ if (-not $isAdmin) {
 }
 
 Write-Host "============================================================" -ForegroundColor Cyan
-Write-Host " Configurador de Politicas de Chrome - Instalacion en 1 Clic " -ForegroundColor Cyan
+Write-Host " Configurador Multi-Navegador - Chrome, Edge, Opera         " -ForegroundColor Cyan
 Write-Host "============================================================" -ForegroundColor Cyan
 
 $EXT_ID = "mndncghnabjmepgdapcijjohdjonkkle"
 $UPDATE_URL = "https://jkober.github.io/app_scanner_release/updates.xml"
 $SOURCE_PATTERN = "https://jkober.github.io/*"
-$REG_BASE = "HKLM:\SOFTWARE\Policies\Google\Chrome"
 
-# 2. Asegurar que existe la clave base en el Registro
-if (-not (Test-Path $REG_BASE)) {
-    Write-Host "[*] Creando clave de directivas de Chrome en Registro..." -ForegroundColor Gray
-    New-Item -Path $REG_BASE -Force | Out-Null
+# Lista de navegadores Chromium en el Registro
+$browsers = @(
+    @{ Name = "Google Chrome";   Path = "HKLM:\SOFTWARE\Policies\Google\Chrome" },
+    @{ Name = "Microsoft Edge";  Path = "HKLM:\SOFTWARE\Policies\Microsoft\Edge" },
+    @{ Name = "Chromium";        Path = "HKLM:\SOFTWARE\Policies\Chromium" },
+    @{ Name = "Brave Browser";   Path = "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" }
+)
+
+foreach ($b in $browsers) {
+    $regBase = $b.Path
+    $bName   = $b.Name
+
+    if (-not (Test-Path $regBase)) {
+        New-Item -Path $regBase -Force | Out-Null
+    }
+
+    # 1. ExtensionSettings
+    $currentJsonRaw = (Get-ItemProperty -Path $regBase -Name "ExtensionSettings" -ErrorAction SilentlyContinue).ExtensionSettings
+    $settingsObj = @{}
+    if ($currentJsonRaw) {
+        try {
+            $parsed = $currentJsonRaw | ConvertFrom-Json -AsHashtable
+            if ($parsed) { $settingsObj = $parsed }
+        } catch {}
+    }
+
+    $settingsObj[$EXT_ID] = @{
+        "installation_mode" = "allowed"
+        "update_url"        = $UPDATE_URL
+    }
+
+    $finalJson = ($settingsObj | ConvertTo-Json -Compress -Depth 10)
+    Set-ItemProperty -Path $regBase -Name "ExtensionSettings" -Value $finalJson -Type String
+
+    # 2. ExtensionInstallSources
+    $sourcesPath = Join-Path $regBase "ExtensionInstallSources"
+    if (-not (Test-Path $sourcesPath)) { New-Item -Path $sourcesPath -Force | Out-Null }
+    Set-ItemProperty -Path $sourcesPath -Name "1" -Value $SOURCE_PATTERN -Type String
+
+    # 3. ExtensionInstallAllowlist
+    $allowPath = Join-Path $regBase "ExtensionInstallAllowlist"
+    if (-not (Test-Path $allowPath)) { New-Item -Path $allowPath -Force | Out-Null }
+    Set-ItemProperty -Path $allowPath -Name "1" -Value $EXT_ID -Type String
+
+    # Limpiar tokens si existieran
+    Remove-ItemProperty -Path $regBase -Name "CloudManagementEnrollmentToken" -ErrorAction SilentlyContinue
+
+    Write-Host "[+] Politicas aplicadas para: $bName" -ForegroundColor Green
 }
-
-# 3. Configurar ExtensionSettings con installation_mode = allowed (Sin advertencia [BLOCKED])
-$currentJsonRaw = (Get-ItemProperty -Path $REG_BASE -Name "ExtensionSettings" -ErrorAction SilentlyContinue).ExtensionSettings
-$settingsObj = @{}
-
-if ($currentJsonRaw) {
-    try {
-        $parsed = $currentJsonRaw | ConvertFrom-Json -AsHashtable
-        if ($parsed) { $settingsObj = $parsed }
-    } catch {}
-}
-
-$settingsObj[$EXT_ID] = @{
-    "installation_mode" = "allowed"
-    "update_url"        = $UPDATE_URL
-}
-
-$finalJson = ($settingsObj | ConvertTo-Json -Compress -Depth 10)
-Set-ItemProperty -Path $REG_BASE -Name "ExtensionSettings" -Value $finalJson -Type String
-Write-Host "[+] ExtensionSettings configurado con modo 'allowed' y URL de actualizacion." -ForegroundColor Green
-
-# 4. Configurar ExtensionInstallSources para autorizar la descarga directa desde GitHub Pages
-$sourcesPath = Join-Path $REG_BASE "ExtensionInstallSources"
-if (-not (Test-Path $sourcesPath)) { New-Item -Path $sourcesPath -Force | Out-Null }
-Set-ItemProperty -Path $sourcesPath -Name "1" -Value $SOURCE_PATTERN -Type String
-Write-Host "[+] ExtensionInstallSources autorizo: $SOURCE_PATTERN" -ForegroundColor Green
-
-# 5. Configurar ExtensionInstallAllowlist para habilitar la extension
-$allowPath = Join-Path $REG_BASE "ExtensionInstallAllowlist"
-if (-not (Test-Path $allowPath)) { New-Item -Path $allowPath -Force | Out-Null }
-Set-ItemProperty -Path $allowPath -Name "1" -Value $EXT_ID -Type String
-Write-Host "[+] ExtensionInstallAllowlist autorizo el ID: $EXT_ID" -ForegroundColor Green
-
-# 6. Limpiar token vacio si existiera
-Remove-ItemProperty -Path $REG_BASE -Name "CloudManagementEnrollmentToken" -ErrorAction SilentlyContinue
 
 Write-Host "`n------------------------------------------------------------" -ForegroundColor Cyan
-Write-Host "[OK] POLITICAS APLICADAS CON EXITO" -ForegroundColor Green
+Write-Host "[OK] POLITICAS APLICADAS PARA CHROME, EDGE Y OPERA" -ForegroundColor Green
 Write-Host "------------------------------------------------------------" -ForegroundColor Cyan
 Write-Host "PASOS PARA INSTALAR LA EXTENSION:" -ForegroundColor Yellow
-Write-Host " 1. Si Chrome esta abierto, cierrelo y vuelva a abrirlo."
-Write-Host " 2. Ingrese a su pagina de descargas:"
+Write-Host " 1. Si el navegador esta abierto (Chrome, Edge u Opera), cierrelo y vuelva a abrirlo."
+Write-Host " 2. Ingrese a la pagina de descargas:"
 Write-Host "    https://jkober.github.io/app_scanner_release/" -ForegroundColor White
-Write-Host " 3. Haga clic en el enlace para descargar 'chrome.crx'."
-Write-Host "    Chrome abrira directamente la ventana de instalacion:"
-Write-Host "    'Quieres agregar RCivil Scanner Bridge?'" -ForegroundColor White
-Write-Host " 4. Pulse 'Agregar extension' y quedara instalada."
-Write-Host "    Las actualizaciones futuras se descargaran solas desde updates.xml."
+Write-Host " 3. Haga clic en el boton para instalar la extension (chrome.crx)."
+Write-Host " 4. Pulse 'Agregar extension' / 'Instalar' en la ventana de confirmacion."
 Write-Host "------------------------------------------------------------`n" -ForegroundColor Cyan
 
 Write-Host "Presione Enter para finalizar..." -ForegroundColor Gray
