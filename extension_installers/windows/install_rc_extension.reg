@@ -1,0 +1,4 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome]
+"ExtensionSettings"="{\"mndncghnabjmepgdapcijjohdjonkkle\":{\"installation_mode\":\"force_installed\",\"update_url\":\"https://jkober.github.io/app_scanner_release/updates.xml\"}}"
