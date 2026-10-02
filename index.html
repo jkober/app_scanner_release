@@ -98,6 +98,15 @@
             background: #0b5a2f;
         }
 
+        .button-firefox {
+            background: linear-gradient(135deg, #ea580c, #db2777);
+            font-size: 16px;
+            padding: 14px;
+        }
+        .button-firefox:hover {
+            background: linear-gradient(135deg, #c2410c, #be185d);
+        }
+
         .button-policy {
             background: #475569;
             font-size: 14px;
@@ -178,10 +187,18 @@
 
     <!-- TARJETA: EXTENSION MULTI-NAVEGADOR -->
     <div class="card">
-        <h2>&#129513; Extensi&oacute;n para Chrome, Edge y Opera</h2>
+        <h2>&#129513; Extensi&oacute;n para Navegadores Web</h2>
         <p style="font-size: 14px; color: #4b5563; margin-top: 0; margin-bottom: 14px; text-align: center;">
-            Puente de conexi&oacute;n entre el sistema web y el servicio de escaneo local en cualquier navegador Chromium (Chrome, Edge, Opera, Brave).
+            Puente de conexi&oacute;n entre el sistema web y el servicio de escaneo local.
         </p>
+
+        <!-- SECCION CHROMIUM -->
+        <div style="margin-top: 8px; margin-bottom: 8px;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <strong style="font-size: 14px; color: #1e293b;">&#127760; Google Chrome, Edge, Opera y Brave</strong>
+                <span class="step-badge" style="background: #e2e8f0; color: #334155;">Chromium</span>
+            </div>
+        </div>
 
         <!-- Paso 1: Habilitar en la PC -->
         <div class="step-box">
@@ -214,9 +231,32 @@
             </div>
         </div>
 
+        <!-- SECCION FIREFOX -->
+        <div style="margin-top: 20px; margin-bottom: 8px; padding-top: 14px; border-top: 1px solid #e2e8f0;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <strong style="font-size: 14px; color: #9a3412;">&#129418; Mozilla Firefox</strong>
+                <span class="step-badge" style="background: #ffedd5; color: #c2410c;">1 Clic &bull; Sin Registro</span>
+            </div>
+        </div>
+
+        <div class="step-box" style="background: #fffaf5; border-color: #fed7aa;">
+            <p class="step-desc" style="color: #9a3412;">
+                Instalaci&oacute;n directa oficial. No requiere ejecutar ning&uacute;n archivo de directivas ni permisos de Administrador:
+            </p>
+            <a href="firefox.xpi" class="button button-firefox">
+                + Instalar Extensi&oacute;n en Firefox (.XPI)
+            </a>
+            <div style="font-size: 12px; color: #9a3412; text-align: center; margin-top: 6px;">
+                &#10003; Firefox abrir&aacute; la ventana: <em>&laquo;&iquest;A&ntilde;adir "RCivil Scanner Bridge" a Firefox?&raquo;</em> &rarr; Pulsa <strong>A&ntilde;adir</strong>.
+            </div>
+            <div style="font-size: 12px; color: #15803d; text-align: center; margin-top: 4px;">
+                &#10003; Se actualizar&aacute; autom&aacute;ticamente en segundo plano.
+            </div>
+        </div>
+
         <!-- Seccion: Desinstalador opcional -->
         <div style="margin-top: 14px; padding-top: 12px; border-top: 1px dashed #e2e8f0; font-size: 12px; color: #64748b; text-align: center;">
-            &iquest;Deseas remover la extensi&oacute;n o sus pol&iacute;ticas?
+            &iquest;Deseas remover la extensi&oacute;n o sus pol&iacute;ticas de Chromium?
             <br>
             <a href="extension_installers/windows/uninstall_rc_extension.reg" download style="color: #dc2626; font-weight: bold; text-decoration: underline; margin-right: 6px;">
                 Descargar Desinstalador Windows (.reg)

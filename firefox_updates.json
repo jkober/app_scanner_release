@@ -1,0 +1,12 @@
+{
+  "addons": {
+    "rcivil_scanner@tudominio.com": {
+      "updates": [
+        {
+          "version": "1.0.1",
+          "update_link": "https://jkober.github.io/app_scanner_release/firefox.xpi"
+        }
+      ]
+    }
+  }
+}
