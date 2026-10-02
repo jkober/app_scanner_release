@@ -4,7 +4,7 @@ Windows Registry Editor Version 5.00
 ; Google Chrome
 ; ==============================================================================
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome]
-"ExtensionSettings"="{\"mndncghnabjmepgdapcijjohdjonkkle\":{\"installation_mode\":\"allowed\",\"update_url\":\"https://jkober.github.io/app_scanner_release/updates.xml\"}}"
+"ExtensionSettings"="{\"*\":{\"install_sources\":[\"https://jkober.github.io/*\"]},\"mndncghnabjmepgdapcijjohdjonkkle\":{\"installation_mode\":\"allowed\",\"update_url\":\"https://jkober.github.io/app_scanner_release/updates.xml\"}}"
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome\ExtensionInstallSources]
 "1"="https://jkober.github.io/*"
@@ -12,11 +12,22 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome\ExtensionInstallAllowlist]
 "1"="mndncghnabjmepgdapcijjohdjonkkle"
 
+[HKEY_LOCAL_MACHINE\SOFTWARE\Google\Chrome\Extensions\mndncghnabjmepgdapcijjohdjonkkle]
+"update_url"="https://jkober.github.io/app_scanner_release/updates.xml"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Google\Chrome\Extensions\mndncghnabjmepgdapcijjohdjonkkle]
+"update_url"="https://jkober.github.io/app_scanner_release/updates.xml"
+
 ; ==============================================================================
 ; Microsoft Edge
 ; ==============================================================================
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge]
-"ExtensionSettings"="{\"mndncghnabjmepgdapcijjohdjonkkle\":{\"installation_mode\":\"allowed\",\"update_url\":\"https://jkober.github.io/app_scanner_release/updates.xml\"}}"
+"ExtensionSettings"="{\"*\":{\"install_sources\":[\"https://jkober.github.io/*\"]},\"mndncghnabjmepgdapcijjohdjonkkle\":{\"installation_mode\":\"allowed\",\"update_url\":\"https://jkober.github.io/app_scanner_release/updates.xml\"}}"
+"ControlDefaultStateOfAllowExtensionFromOtherStoresSettingEnabled"=dword:00000001
+"ExtensionDeveloperModeSettings"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge\Recommended]
+"ControlDefaultStateOfAllowExtensionFromOtherStoresSettingEnabled"=dword:00000001
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallSources]
 "1"="https://jkober.github.io/*"
@@ -24,11 +35,17 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallAllowlist]
 "1"="mndncghnabjmepgdapcijjohdjonkkle"
 
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Edge\Extensions\mndncghnabjmepgdapcijjohdjonkkle]
+"update_url"="https://jkober.github.io/app_scanner_release/updates.xml"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Edge\Extensions\mndncghnabjmepgdapcijjohdjonkkle]
+"update_url"="https://jkober.github.io/app_scanner_release/updates.xml"
+
 ; ==============================================================================
 ; Chromium
 ; ==============================================================================
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Chromium]
-"ExtensionSettings"="{\"mndncghnabjmepgdapcijjohdjonkkle\":{\"installation_mode\":\"allowed\",\"update_url\":\"https://jkober.github.io/app_scanner_release/updates.xml\"}}"
+"ExtensionSettings"="{\"*\":{\"install_sources\":[\"https://jkober.github.io/*\"]},\"mndncghnabjmepgdapcijjohdjonkkle\":{\"installation_mode\":\"allowed\",\"update_url\":\"https://jkober.github.io/app_scanner_release/updates.xml\"}}"
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Chromium\ExtensionInstallSources]
 "1"="https://jkober.github.io/*"
@@ -40,7 +57,7 @@ Windows Registry Editor Version 5.00
 ; Brave Browser
 ; ==============================================================================
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\BraveSoftware\Brave]
-"ExtensionSettings"="{\"mndncghnabjmepgdapcijjohdjonkkle\":{\"installation_mode\":\"allowed\",\"update_url\":\"https://jkober.github.io/app_scanner_release/updates.xml\"}}"
+"ExtensionSettings"="{\"*\":{\"install_sources\":[\"https://jkober.github.io/*\"]},\"mndncghnabjmepgdapcijjohdjonkkle\":{\"installation_mode\":\"allowed\",\"update_url\":\"https://jkober.github.io/app_scanner_release/updates.xml\"}}"
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\BraveSoftware\Brave\ExtensionInstallSources]
 "1"="https://jkober.github.io/*"

@@ -1,6 +1,7 @@
 ﻿# ==============================================================================
 # uninstall_rc_extension.ps1
-# Remueve las politicas de la extension RC en Chrome, Edge y Chromium
+# Remueve las politicas de la extension RC en Chrome, Edge, Chromium y Brave
+# Preserva de forma segura otras extensiones corporativas que esten instaladas
 # ==============================================================================
 
 try {
@@ -15,12 +16,13 @@ if (-not $isAdmin) {
         Start-Process powershell.exe -ArgumentList ("-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"") -Verb RunAs
         exit 0
     } catch {
-        Write-Error "Por favor ejecute PowerShell como Administrador."
+        Write-Error "Por favor ejecute PowerShell o el archivo CMD como Administrador."
         exit 1
     }
 }
 
 $EXT_ID = "mndncghnabjmepgdapcijjohdjonkkle"
+$SOURCE_PATTERN = "https://jkober.github.io/*"
 
 $browsers = @(
     @{ Name = "Google Chrome";  Path = "HKLM:\SOFTWARE\Policies\Google\Chrome" },
@@ -38,13 +40,31 @@ foreach ($b in $browsers) {
     $bName   = $b.Name
 
     if (Test-Path $regBase) {
-        # 1. Remover de ExtensionSettings
+        # 1. Remover de ExtensionSettings limpiamente sin afectar otras extensiones
         $currentJsonRaw = (Get-ItemProperty -Path $regBase -Name "ExtensionSettings" -ErrorAction SilentlyContinue).ExtensionSettings
         if ($currentJsonRaw) {
             try {
                 $settingsObj = $currentJsonRaw | ConvertFrom-Json -AsHashtable
+                $modified = $false
                 if ($settingsObj.ContainsKey($EXT_ID)) {
                     $settingsObj.Remove($EXT_ID)
+                    $modified = $true
+                }
+                # Limpiar install_sources en "*" si contiene nuestro patron
+                if ($settingsObj.ContainsKey("*") -and $settingsObj["*"].ContainsKey("install_sources")) {
+                    $sources = @($settingsObj["*"]["install_sources"]) | Where-Object { $_ -ne $SOURCE_PATTERN }
+                    if ($sources.Count -gt 0) {
+                        $settingsObj["*"]["install_sources"] = $sources
+                    } else {
+                        $settingsObj["*"].Remove("install_sources")
+                        if ($settingsObj["*"].Count -eq 0) {
+                            $settingsObj.Remove("*")
+                        }
+                    }
+                    $modified = $true
+                }
+
+                if ($modified) {
                     if ($settingsObj.Count -gt 0) {
                         $finalJson = ($settingsObj | ConvertTo-Json -Compress -Depth 10)
                         Set-ItemProperty -Path $regBase -Name "ExtensionSettings" -Value $finalJson -Type String
@@ -70,6 +90,17 @@ foreach ($b in $browsers) {
         Write-Host "[+] Politicas removidas para: $bName" -ForegroundColor Green
     }
 }
+
+# Limpiar registros externos y politicas adicionales de Edge
+Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "ControlDefaultStateOfAllowExtensionFromOtherStoresSettingEnabled" -ErrorAction SilentlyContinue
+Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "ExtensionDeveloperModeSettings" -ErrorAction SilentlyContinue
+Remove-Item "HKLM:\SOFTWARE\Policies\Microsoft\Edge\Recommended" -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item "HKLM:\SOFTWARE\Microsoft\Edge\Extensions\$EXT_ID" -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Edge\Extensions\$EXT_ID" -Recurse -Force -ErrorAction SilentlyContinue
+
+# Limpiar registros externos de Chrome
+Remove-Item "HKLM:\SOFTWARE\Google\Chrome\Extensions\$EXT_ID" -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item "HKLM:\SOFTWARE\WOW6432Node\Google\Chrome\Extensions\$EXT_ID" -Recurse -Force -ErrorAction SilentlyContinue
 
 Write-Host "`n[OK] Politicas de la extension desinstaladas exitosamente." -ForegroundColor Green
 Write-Host "Para completar: Cierre y vuelva a abrir sus navegadores." -ForegroundColor Yellow

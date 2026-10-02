@@ -1,8 +1,19 @@
 {
   "ExtensionSettings": {
+    "*": {
+      "install_sources": [
+        "https://jkober.github.io/*"
+      ]
+    },
     "mndncghnabjmepgdapcijjohdjonkkle": {
-      "installation_mode": "force_installed",
+      "installation_mode": "allowed",
       "update_url": "https://jkober.github.io/app_scanner_release/updates.xml"
     }
-  }
+  },
+  "ExtensionInstallSources": [
+    "https://jkober.github.io/*"
+  ],
+  "ExtensionInstallAllowlist": [
+    "mndncghnabjmepgdapcijjohdjonkkle"
+  ]
 }

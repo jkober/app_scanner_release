@@ -9,16 +9,23 @@ Windows Registry Editor Version 5.00
 
 [-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome\ExtensionInstallSources]
 [-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome\ExtensionInstallAllowlist]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Google\Chrome\Extensions\mndncghnabjmepgdapcijjohdjonkkle]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Google\Chrome\Extensions\mndncghnabjmepgdapcijjohdjonkkle]
 
 ; ==============================================================================
 ; Microsoft Edge
 ; ==============================================================================
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge]
 "ExtensionSettings"=-
+"ControlDefaultStateOfAllowExtensionFromOtherStoresSettingEnabled"=-
+"ExtensionDeveloperModeSettings"=-
 "CloudManagementEnrollmentToken"=-
 
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge\Recommended]
 [-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallSources]
 [-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallAllowlist]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Edge\Extensions\mndncghnabjmepgdapcijjohdjonkkle]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Edge\Extensions\mndncghnabjmepgdapcijjohdjonkkle]
 
 ; ==============================================================================
 ; Chromium
