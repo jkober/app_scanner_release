@@ -3,7 +3,7 @@
     "rcivil_scanner@tudominio.com": {
       "updates": [
         {
-          "version": "1.0.12",
+          "version": "1.0.13",
           "update_link": "https://jkober.github.io/app_scanner_release/firefox.xpi"
         }
       ]
