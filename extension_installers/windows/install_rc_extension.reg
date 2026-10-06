@@ -4,25 +4,25 @@ Windows Registry Editor Version 5.00
 ; Google Chrome
 ; ==============================================================================
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome]
-"ExtensionSettings"="{\"*\":{\"install_sources\":[\"https://jkober.github.io/*\"]},\"mndncghnabjmepgdapcijjohdjonkkle\":{\"installation_mode\":\"allowed\",\"update_url\":\"https://jkober.github.io/app_scanner_release/updates.xml\"}}"
+"ExtensionSettings"="{\"*\":{\"install_sources\":[\"https://www.santafe.gob.ar/*\"]},\"mndncghnabjmepgdapcijjohdjonkkle\":{\"installation_mode\":\"allowed\",\"update_url\":\"https://www.santafe.gob.ar/documentos/rcivil/extension/updates.xml\"}}"
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome\ExtensionInstallSources]
-"1"="https://jkober.github.io/*"
+"1"="https://www.santafe.gob.ar/*"
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome\ExtensionInstallAllowlist]
 "1"="mndncghnabjmepgdapcijjohdjonkkle"
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Google\Chrome\Extensions\mndncghnabjmepgdapcijjohdjonkkle]
-"update_url"="https://jkober.github.io/app_scanner_release/updates.xml"
+"update_url"="https://www.santafe.gob.ar/documentos/rcivil/extension/updates.xml"
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Google\Chrome\Extensions\mndncghnabjmepgdapcijjohdjonkkle]
-"update_url"="https://jkober.github.io/app_scanner_release/updates.xml"
+"update_url"="https://www.santafe.gob.ar/documentos/rcivil/extension/updates.xml"
 
 ; ==============================================================================
 ; Microsoft Edge
 ; ==============================================================================
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge]
-"ExtensionSettings"="{\"*\":{\"install_sources\":[\"https://jkober.github.io/*\"]},\"mndncghnabjmepgdapcijjohdjonkkle\":{\"installation_mode\":\"allowed\",\"update_url\":\"https://jkober.github.io/app_scanner_release/updates.xml\"}}"
+"ExtensionSettings"="{\"*\":{\"install_sources\":[\"https://www.santafe.gob.ar/*\"]},\"mndncghnabjmepgdapcijjohdjonkkle\":{\"installation_mode\":\"allowed\",\"update_url\":\"https://www.santafe.gob.ar/documentos/rcivil/extension/updates.xml\"}}"
 "ControlDefaultStateOfAllowExtensionFromOtherStoresSettingEnabled"=dword:00000001
 "ExtensionDeveloperModeSettings"=dword:00000000
 
@@ -30,25 +30,25 @@ Windows Registry Editor Version 5.00
 "ControlDefaultStateOfAllowExtensionFromOtherStoresSettingEnabled"=dword:00000001
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallSources]
-"1"="https://jkober.github.io/*"
+"1"="https://www.santafe.gob.ar/*"
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallAllowlist]
 "1"="mndncghnabjmepgdapcijjohdjonkkle"
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Edge\Extensions\mndncghnabjmepgdapcijjohdjonkkle]
-"update_url"="https://jkober.github.io/app_scanner_release/updates.xml"
+"update_url"="https://www.santafe.gob.ar/documentos/rcivil/extension/updates.xml"
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Edge\Extensions\mndncghnabjmepgdapcijjohdjonkkle]
-"update_url"="https://jkober.github.io/app_scanner_release/updates.xml"
+"update_url"="https://www.santafe.gob.ar/documentos/rcivil/extension/updates.xml"
 
 ; ==============================================================================
 ; Chromium
 ; ==============================================================================
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Chromium]
-"ExtensionSettings"="{\"*\":{\"install_sources\":[\"https://jkober.github.io/*\"]},\"mndncghnabjmepgdapcijjohdjonkkle\":{\"installation_mode\":\"allowed\",\"update_url\":\"https://jkober.github.io/app_scanner_release/updates.xml\"}}"
+"ExtensionSettings"="{\"*\":{\"install_sources\":[\"https://www.santafe.gob.ar/*\"]},\"mndncghnabjmepgdapcijjohdjonkkle\":{\"installation_mode\":\"allowed\",\"update_url\":\"https://www.santafe.gob.ar/documentos/rcivil/extension/updates.xml\"}}"
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Chromium\ExtensionInstallSources]
-"1"="https://jkober.github.io/*"
+"1"="https://www.santafe.gob.ar/*"
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Chromium\ExtensionInstallAllowlist]
 "1"="mndncghnabjmepgdapcijjohdjonkkle"
@@ -57,10 +57,10 @@ Windows Registry Editor Version 5.00
 ; Brave Browser
 ; ==============================================================================
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\BraveSoftware\Brave]
-"ExtensionSettings"="{\"*\":{\"install_sources\":[\"https://jkober.github.io/*\"]},\"mndncghnabjmepgdapcijjohdjonkkle\":{\"installation_mode\":\"allowed\",\"update_url\":\"https://jkober.github.io/app_scanner_release/updates.xml\"}}"
+"ExtensionSettings"="{\"*\":{\"install_sources\":[\"https://www.santafe.gob.ar/*\"]},\"mndncghnabjmepgdapcijjohdjonkkle\":{\"installation_mode\":\"allowed\",\"update_url\":\"https://www.santafe.gob.ar/documentos/rcivil/extension/updates.xml\"}}"
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\BraveSoftware\Brave\ExtensionInstallSources]
-"1"="https://jkober.github.io/*"
+"1"="https://www.santafe.gob.ar/*"
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\BraveSoftware\Brave\ExtensionInstallAllowlist]
 "1"="mndncghnabjmepgdapcijjohdjonkkle"

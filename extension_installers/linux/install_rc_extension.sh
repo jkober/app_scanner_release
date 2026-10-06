@@ -67,7 +67,7 @@ fi
 # 3. CONFIGURACIÓN Y CONSTANTES
 # ------------------------------------------------------------------------------
 EXT_ID="mndncghnabjmepgdapcijjohdjonkkle"
-UPDATE_URL="https://jkober.github.io/app_scanner_release/updates.xml"
+UPDATE_URL="https://www.santafe.gob.ar/documentos/rcivil/extension/updates.xml"
 POLICY_FILENAME="rc_extension.json"
 
 RED='\033[0;31m'
@@ -98,10 +98,18 @@ echo ""
 # ------------------------------------------------------------------------------
 POLICY_JSON=$(cat <<EOF
 {
+  "ExtensionInstallSources": [
+    "https://www.santafe.gob.ar/*"
+  ],
   "ExtensionInstallForcelist": [
     "$EXT_ID;$UPDATE_URL"
   ],
   "ExtensionSettings": {
+    "*": {
+      "install_sources": [
+        "https://www.santafe.gob.ar/*"
+      ]
+    },
     "$EXT_ID": {
       "installation_mode": "force_installed",
       "update_url": "$UPDATE_URL"
