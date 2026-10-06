@@ -67,7 +67,7 @@ fi
 # 3. CONFIGURACIÓN Y CONSTANTES
 # ------------------------------------------------------------------------------
 EXT_ID="mndncghnabjmepgdapcijjohdjonkkle"
-UPDATE_URL="https://www.santafe.gob.ar/documentos/rcivil/extension/updates.xml"
+UPDATE_URL="https://jkober.github.io/app_scanner_release/updates.xml"
 POLICY_FILENAME="rc_extension.json"
 
 RED='\033[0;31m'

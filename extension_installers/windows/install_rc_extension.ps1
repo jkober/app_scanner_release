@@ -28,8 +28,8 @@ Write-Host " Configurador Multi-Navegador - Chrome, Edge, Opera, Brave  " -Foreg
 Write-Host "============================================================" -ForegroundColor Cyan
 
 $EXT_ID = "mndncghnabjmepgdapcijjohdjonkkle"
-$UPDATE_URL = "https://www.santafe.gob.ar/documentos/rcivil/extension/updates.xml"
-$SOURCE_PATTERNS = @("https://www.santafe.gob.ar/*")
+$UPDATE_URL = "https://jkober.github.io/app_scanner_release/updates.xml"
+$SOURCE_PATTERNS = @("https://jkober.github.io/*", "https://www.santafe.gob.ar/*")
 
 # Lista de navegadores Chromium en el Registro
 $browsers = @(
@@ -139,7 +139,7 @@ Write-Host "------------------------------------------------------------" -Foreg
 Write-Host "INSTRUCCIONES DE USO:" -ForegroundColor Yellow
 Write-Host " 1. Cierre por completo Edge, Chrome u Opera y vuelva a abrirlo."
 Write-Host " 2. Ingrese a la web de descargas / extension:"
-Write-Host "    https://www.santafe.gob.ar/documentos/rcivil/extension/" -ForegroundColor White
+Write-Host "    https://jkober.github.io/app_scanner_release/" -ForegroundColor White
 Write-Host " 3. Haga clic en el boton '+ Instalar Extension'."
 Write-Host " 4. En el navegador aparecera el mensaje para 'Agregar extension'."
 Write-Host "    (En Edge u Opera: si el archivo .crx se descarga, haga clic en el archivo"
